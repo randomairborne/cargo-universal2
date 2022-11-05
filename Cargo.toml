@@ -1,7 +1,7 @@
 
 [package]
 name = "universal2"
-version = "0.0.0"
+version = "0.0.1"
 description = "Build universal2 binaries, because cargo won't."
 edition = "2021"
 readme = "README.md"
@@ -19,13 +19,11 @@ authors = [
 name = "universal2"
 path = "src/bin/universal2.rs"
 
-# enables invocation as `cargo sqlx`; required for `prepare` subcommand
 [[bin]]
 name = "cargo-universal2"
 path = "src/bin/cargo-universal2.rs"
 
 [dependencies]
-clap = { version = "4", features = ["derive", "env"] }
 thiserror = "1"
 cargo_metadata = "0.14"
 console = "0.15"
