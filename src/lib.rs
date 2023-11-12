@@ -9,7 +9,10 @@ pub fn run() -> Result<(), Error> {
         return Err(Error::UnsupportedOS);
     }
 
-    let args = std::env::args().skip(1).collect::<Vec<_>>();
+    let mut args = std::env::args().skip(1).collect::<Vec<_>>();
+    if args.is_empty() {
+        args.push("--release".to_owned());
+    }
     let build_mode = if args.contains(&"--release".to_string()) {
         "release"
     } else {
