@@ -4,7 +4,7 @@ use console::style;
 /// # Errors
 /// Errors when cargo metadata fails
 pub fn run() -> Result<(), Error> {
-    // Since this makes only sense on mac, return en error if running on a different platform
+    // Since this makes only sense on mac, return an error if running on a different platform
     if !cfg!(target_os = "macos") {
         return Err(Error::UnsupportedOS);
     }
