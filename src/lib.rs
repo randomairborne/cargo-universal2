@@ -4,16 +4,17 @@ use console::style;
 /// # Errors
 /// Errors when cargo metadata fails
 pub fn run() -> Result<(), Error> {
-
-
-
     // Since this makes only sense on mac, return en error if running on a different platform
     if !cfg!(target_os = "macos") {
-        return Err(Error::UnsupportedOS)
+        return Err(Error::UnsupportedOS);
     }
 
     let args = std::env::args().skip(1).collect::<Vec<_>>();
-    let build_mode = if args.contains(&"release".to_string()) {"release"} else {"debug"};
+    let build_mode = if args.contains(&"--release".to_string()) {
+        "release"
+    } else {
+        "debug"
+    };
 
     let meta = cargo_metadata::MetadataCommand::new().exec()?;
     let exe_meta = meta.root_package().ok_or(Error::ExpectedPackage)?;
@@ -49,11 +50,13 @@ pub fn run() -> Result<(), Error> {
     std::process::Command::new("lipo")
         .arg("-create")
         .arg("-output")
-        .arg(output)
+        .arg(&output)
         .arg(x86_bin)
         .arg(arm_bin)
         .spawn()?
         .wait()?;
+    println!("{} {}", style("Output").green().bold(), &output.display());
+
     Ok(())
 }
 
