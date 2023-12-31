@@ -1,7 +1,7 @@
 
 [package]
 name = "universal2"
-version = "0.0.1"
+version = "0.0.2"
 description = "Build universal2 binaries, because cargo won't."
 edition = "2021"
 readme = "README.md"
